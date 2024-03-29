@@ -34,7 +34,7 @@ resource "google_artifact_registry_repository" "docker_repo" {
 }
 
 # Task 3: Create Docker image and upload to the Docker repository
-resource "google_cloud_build_trigger" "build_trigger" {
+resource "google_cloudbuild_trigger" "build_trigger" {
   name     = "docker-image-build-trigger"
   description = "Trigger to build and push Docker image to Artifact Registry"
   trigger_template {
