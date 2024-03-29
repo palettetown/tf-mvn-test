@@ -31,5 +31,20 @@ resource "google_cloudbuild_trigger" "build_trigger" {
     repo_name   = google_artifact_registry_repository.docker_repo.name
     branch_name = "^main$"
   }
+  git_file_source {
+    repo_type = "DOCKER"
+    path      = "cloudbuild.yaml"
+  }
+
+  github {
+    owner = "hashicorp"
+    name  = "terraform-provider-google-beta"
+    push {
+      branch = "^main$"
+    }
+  }
+
+
+
   filename = "cloudbuild.yaml"
 }
