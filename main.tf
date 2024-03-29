@@ -16,7 +16,7 @@ provider "google" {
   # Configuration options
   project     = "my-second-project-418213"
   region      = "northamerica-northeast2"
-  credentials = file("C:\\MyPrograms\\GCP\\my-second-project-418213-c4584d61b2a8.json")
+  #credentials = file("C:\\MyPrograms\\GCP\\my-second-project-418213-c4584d61b2a8.json")
 }
 
 #resource "google_service_account" "artifact_registry" {
