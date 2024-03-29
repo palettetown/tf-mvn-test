@@ -29,7 +29,7 @@ resource "google_cloudbuild_trigger" "build_trigger" {
   description = "Trigger to build and push Docker image to Artifact Registry"
   trigger_template {
     repo_name   = google_artifact_registry_repository.docker_repo.name
-    branch_name = "quickstart-image"
+    branch_name = "^main$"
   }
   filename = "cloudbuild.yaml"
 }
