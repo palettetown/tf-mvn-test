@@ -25,6 +25,7 @@ resource "google_service_account" "artifact_registry" {
 
 resource "google_artifact_registry_repository" "docker_repo" {
   provider      = google
+  project = "my-second-project-418213"
   location      = "NORTHAMERICA-NORTHEAST2"
   repository_id = "my-docker-repo"
   format        = "DOCKER"
