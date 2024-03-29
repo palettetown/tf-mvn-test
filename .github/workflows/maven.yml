@@ -19,27 +19,7 @@ permissions:
   id-token: 'write'  
 
 jobs:
-
-  # Task 1: Build Java Application using Maven
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 8
-      uses: actions/setup-java@v3
-      with:
-        java-version: '8'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn -B package 
-    #mvn clean test install --batch-mode #-B package --file pom.xml
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    #- name: Update dependency graph
-    #  uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
-
+  # Task 1: Prepare Infra
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
@@ -100,3 +80,24 @@ jobs:
       #env:
       #    GOOGLE_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
 
+  # Task 2: Build Java Application using Maven
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn -B package 
+    - name: Create Docker Image
+      run: docker build -t us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1 .
+    #mvn clean test install --batch-mode #-B package --file pom.xml
+    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
+    #- name: Update dependency graph
+    #  uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
