@@ -34,14 +34,12 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package 
-    
-    - name: Build and push
-      id: docker_build
-      uses: docker/build-push-action@v2
+
+    - name: Persist workflow data as artifacts
+      uses: actions/upload-artifact@v2
       with:
-       context: .    
-       push: true
-       tags: ${{ github.repository }}:${{ steps.vars.outputs.tag }}      
+       name: github-actions-artifact    
+       path: target
       
     #- name: Create Docker Image
     #  run: docker build -t us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1 .
