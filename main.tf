@@ -9,9 +9,9 @@ terraform {
 
 provider "google" {
   # Configuration options
-  project     = "my-second-project-418213"
-  region      = "northamerica-northeast2"
-  credentials = file("C:\\MyPrograms\\GCP\\my-second-project-418213-c4584d61b2a8.json")
+  project = "my-second-project-418213"
+  region  = "northamerica-northeast2"
+  #credentials = file("C:\\MyPrograms\\GCP\\my-second-project-418213-c4584d61b2a8.json")
 }
 
 # Task 2: Create Docker repository in GCP Artifact Registry
