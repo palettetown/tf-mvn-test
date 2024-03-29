@@ -15,10 +15,10 @@ provider "google" {
 }
 
 # Task 2: Create Docker repository in GCP Artifact Registry
-resource "google_artifact_registry_repository" "docker_repo" {
-  provider      = google
-  project       = "my-second-project-418213"
-  location      = "us-central1"
-  repository_id = "my-docker-repo"
-  format        = "DOCKER"
-}
+#resource "google_artifact_registry_repository" "docker_repo" {
+#  provider      = google
+#  project       = "my-second-project-418213"
+#  location      = "us-central1"
+#  repository_id = "my-docker-repo"
+#  format        = "DOCKER"
+#}
