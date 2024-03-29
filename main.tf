@@ -9,9 +9,9 @@ terraform {
 
 provider "google" {
   # Configuration options
-  project = "my-second-project-418213"
-  region  = "northamerica-northeast2"
-  #credentials = file("C:\\MyPrograms\\GCP\\my-second-project-418213-c4584d61b2a8.json")
+  project     = "my-second-project-418213"
+  region      = "northamerica-northeast2"
+  credentials = file("C:\\MyPrograms\\GCP\\my-second-project-418213-c4584d61b2a8.json")
 }
 
 # Task 2: Create Docker repository in GCP Artifact Registry
@@ -29,22 +29,7 @@ resource "google_cloudbuild_trigger" "build_trigger" {
   description = "Trigger to build and push Docker image to Artifact Registry"
   trigger_template {
     repo_name   = google_artifact_registry_repository.docker_repo.name
-    branch_name = "^main$"
+    branch_name = "main"
   }
-  git_file_source {
-    repo_type = "DOCKER"
-    path      = "cloudbuild.yaml"
-  }
-
-  github {
-    owner = "hashicorp"
-    name  = "terraform-provider-google-beta"
-    push {
-      branch = "^main$"
-    }
-  }
-
-
-
   filename = "cloudbuild.yaml"
 }
