@@ -1,8 +1,8 @@
-resource "google_project_iam_member" "artifact_registry_service_account" {
-  project = "my-second-project-418213"
-  role    = "roles/artifactregistry.serviceAgent"
-  member  = "serviceAccount:ksyservacc@my-second-project-418213.iam.gserviceaccount.com"
-}
+#resource "google_project_iam_member" "artifact_registry_service_account" {
+#  project = "my-second-project-418213"
+#  role    = "roles/artifactregistry.serviceAgent"
+#  member  = "serviceAccount:ksyservacc@my-second-project-418213.iam.gserviceaccount.com"
+#}
 
 resource "google_service_account" "artifact_registry" {
   account_id   = "artifact-registry-sa"
