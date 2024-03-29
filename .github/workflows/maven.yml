@@ -34,7 +34,8 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package 
-      mkdir staging
+    - name: Make Dir
+      run: mkdir staging
     #- name: Create Docker Image
     #  run: docker build -t us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1 .
     #mvn clean test install --batch-mode #-B package --file pom.xml
