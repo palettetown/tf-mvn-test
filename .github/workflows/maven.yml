@@ -34,12 +34,14 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package
+    - name: copy artifact
+      run: cp -p /home/runner/work/tf-mvn-test/tf-mvn-test/target/gs-maven-0.1.0.jar target/gs-maven-0.1.0.jar
+    #- name: Persist workflow data as artifacts
+    #  uses: actions/upload-artifact@v2
+    #  with:
+    #   name: github-actions-artifact    
+    #   path: target
 
-    - name: Persist workflow data as artifacts
-      uses: actions/upload-artifact@v2
-      with:
-       name: github-actions-artifact    
-       path: target
       
     #- name: Create Docker Image
     #  run: docker build -t us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1 .
