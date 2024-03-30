@@ -33,3 +33,16 @@ provider "google" {
 #  }
 #  filename = "cloudbuild.yaml"
 #}
+
+resource "google_cloud_run_v2_job" "default" {
+  name     = "cloudrun-job"
+  location = "us-central1"
+
+  template {
+    template {
+      containers {
+        image = "us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1"
+      }
+    }
+  }
+}
