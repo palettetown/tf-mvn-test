@@ -11,3 +11,5 @@ Job: Build
 Job: Terraform
 1. Create Docker repository in GCP Artifact Registry
 2. Create Cloud Run Job with Docker Image
+
+Note: can't use trigger and cloud build to create image out of the jar in GitHub. Since GitHub doesn't build the jar under /target in the repository (it goes to a different location inaccessible from outside).
