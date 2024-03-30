@@ -423,3 +423,85 @@ Auth Docker & Push:
 	9b41d16926ce: Pushed
 	tag1: digest: sha256:1055be23a3f122fe0073173a6ddb15e689913cdb7f2202c63b1a7677ca0650f8 size: 1155
 		
+		
+		
+----------------------------Cloud Run-----------------------
+	Error: Error creating Job: googleapi: Error 403: Cloud Run Admin API has not been used in project my-second-project-418213 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=my-second-project-418213 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+	│ Details:
+	│ [
+	│   {
+	│     "@type": "type.googleapis.com/google.rpc.Help",
+	│     "links": [
+	│       {
+	│         "description": "Google developers console API activation",
+	│         "url": "https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=my-second-project-418213"
+	│       }
+	│     ]
+	│   },
+	│   {
+	│     "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+	│     "domain": "googleapis.com",
+	│     "metadata": {
+	│       "consumer": "projects/my-second-project-418213",
+	│       "service": "run.googleapis.com"
+	│     },
+	│     "reason": "SERVICE_DISABLED"
+	│   }
+	│ ]
+
+
+Yes, it's possible to enable Cloud Run API with Terraform code. So, you need to add this Terraform code:
+
+resource "google_project_service" "cloud_run_api" {
+  service = "run.googleapis.com"
+}
+Then, you also need to add "depends_on" block with "google_project_service.cloud_run_api" to wait for Cloud Run API to be enabled:
+
+resource "google_cloud_run_service" "renderer" {
+  name     = "renderer"
+  location = "asia-northeast1"
+
+  template {
+    spec {
+      containers {
+        image = "gcr.io/${var.project_id}/renderer:latest"
+      }
+    }
+  }
+  depends_on = [ // Here
+    google_project_service.cloud_run_api
+  ]
+}
+
+
+
+	google_project_service.cloud_run_api: Creating...
+	╷
+	│ Error: Error when reading or editing Project Service : Request `List Project Services my-second-project-418213` returned error: Failed to list enabled services for project my-second-project-418213: googleapi: 
+	  Error 403: Service Usage API has not been used in project 198122355685 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/serviceusage.googleapis.com/overview?project=198122355685 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+	│ Details:
+	│ [
+	│   {
+	│     "@type": "type.googleapis.com/google.rpc.Help",
+	│     "links": [
+	│       {
+	│         "description": "Google developers console API activation",
+	│         "url": "https://console.developers.google.com/apis/api/serviceusage.googleapis.com/overview?project=198122355685"
+	│       }
+	│     ]
+	│   },
+	│   {
+	│     "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+	│     "domain": "googleapis.com",
+	│     "metadata": {
+	│       "consumer": "projects/198122355685",
+	│       "service": "serviceusage.googleapis.com"
+	│     },
+	│     "reason": "SERVICE_DISABLED"
+	│   }
+	│ ]
+	│ , accessNotConfigured
+	│ 
+	│   with google_project_service.cloud_run_api,
+	│   on main.tf line 37, in resource "google_project_service" "cloud_run_api":
+	│   37: resource "google_project_service" "cloud_run_api" {
