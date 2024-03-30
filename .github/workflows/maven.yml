@@ -74,9 +74,11 @@ jobs:
         service_account: 'ksyservacc@my-second-project-418213.iam.gserviceaccount.com'
         token_format: "access_token"
 
-    #- id: 'gcloud'
-    #  name: 'gcloud'
-    #  run: |-
+    - id: 'gcloud'
+      name: 'gcloud'
+      run: |-             
+         gcloud builds submit --region=us-west2 --config cloudbuild.yaml
+
     #    gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
     #    echo "${{ steps.auth.outputs.credentials_file_path }}"
 
