@@ -34,6 +34,8 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package
+    - name: Docker Image Build
+      run: docker build -t us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1 .
     #- name: Persist workflow data as artifacts
     #  uses: actions/upload-artifact@v2
     #  with:
@@ -74,10 +76,10 @@ jobs:
         service_account: 'ksyservacc@my-second-project-418213.iam.gserviceaccount.com'
         token_format: "access_token"
 
-    - id: 'gcloud'
-      name: 'gcloud'
-      run: |-             
-         gcloud builds submit --region=us-central1 --config cloudbuild.yaml
+    #- id: 'gcloud'
+    #  name: 'gcloud'
+    #  run: |-             
+    #     gcloud builds submit --region=us-central1 --config cloudbuild.yaml
 
     #    gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
     #    echo "${{ steps.auth.outputs.credentials_file_path }}"
