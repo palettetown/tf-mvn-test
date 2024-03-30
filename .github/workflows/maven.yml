@@ -36,19 +36,8 @@ jobs:
       run: mvn -B package
     - name: Docker Image Build
       run: docker build -t us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1 .
-
-    # Configure Workload Identity Federation via a credentials file.
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        create_credentials_file: true
-        workload_identity_provider: 'projects/198122355685/locations/global/workloadIdentityPools/githubactions/providers/github'
-        service_account: 'ksyservacc@my-second-project-418213.iam.gserviceaccount.com'
-        token_format: "access_token"
-        
-    - name: Docker Image Push to Artifact Registry
-      run: docker push us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1
+    #- name: Docker Image Push to Artifact Registry
+    #  run: docker push us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1
     #- name: Persist workflow data as artifacts
     #  uses: actions/upload-artifact@v2
     #  with:
@@ -89,12 +78,11 @@ jobs:
         service_account: 'ksyservacc@my-second-project-418213.iam.gserviceaccount.com'
         token_format: "access_token"
 
-    #- id: 'gcloud'
-    #  name: 'gcloud'
-    #  run: |-             
-    #     gcloud builds submit --region=us-central1 --config cloudbuild.yaml
-
-    #    gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+    - id: 'gcloud'
+      name: 'gcloud'
+      run: |-             
+        gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+        docker push us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1
     #    echo "${{ steps.auth.outputs.credentials_file_path }}"
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
