@@ -36,6 +36,8 @@ jobs:
       run: mvn -B package
     - name: Docker Image Build
       run: docker build -t us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1 .
+    - name: Docker Image Push to Artifact Registry
+      run: docker push us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1
     #- name: Persist workflow data as artifacts
     #  uses: actions/upload-artifact@v2
     #  with:
