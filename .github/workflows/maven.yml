@@ -50,10 +50,10 @@ jobs:
     - id: 'gcloud'
       name: 'gcloud'
       run: |-             
-        gcloud auth login
+        gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}" --no-user-output-enabled
         gcloud auth configure-docker us-central1-docker.pkg.dev
         docker push us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1
-    #gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}" --no-user-output-enabled        
+            
     #    echo "${{ steps.auth.outputs.credentials_file_path }}"
     
     #- name: Docker Image Push to Artifact Registry
