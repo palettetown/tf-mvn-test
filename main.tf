@@ -15,21 +15,21 @@ provider "google" {
 }
 
 # Task 2: Create Docker repository in GCP Artifact Registry
-resource "google_artifact_registry_repository" "docker_repo" {
-  provider      = google
-  project       = "my-second-project-418213"
-  location      = "us-central1"
-  repository_id = "my-docker-repo"
-  format        = "DOCKER"
-}
+#resource "google_artifact_registry_repository" "docker_repo" {
+#  provider      = google
+#  project       = "my-second-project-418213"
+#  location      = "us-central1"
+#  repository_id = "my-docker-repo"
+#  format        = "DOCKER"
+#}
 
 # Task 3: Create Docker image and upload to the Docker repository
-resource "google_cloudbuild_trigger" "build_trigger" {
-  name        = "docker-image-build-trigger"
-  description = "Trigger to build and push Docker image to Artifact Registry"
-  trigger_template {
-    repo_name   = google_artifact_registry_repository.docker_repo.name
-    branch_name = "main"
-  }
-  filename = "cloudbuild.yaml"
-}
+#resource "google_cloudbuild_trigger" "build_trigger" {
+#  name        = "docker-image-build-trigger"
+#  description = "Trigger to build and push Docker image to Artifact Registry"
+#  trigger_template {
+#    repo_name   = google_artifact_registry_repository.docker_repo.name
+#    branch_name = "main"
+#  }
+#  filename = "cloudbuild.yaml"
+#}
