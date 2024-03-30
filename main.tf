@@ -34,6 +34,10 @@ provider "google" {
 #  filename = "cloudbuild.yaml"
 #}
 
+resource "google_project_service" "cloud_run_api" {
+  service = "run.googleapis.com"
+}
+
 resource "google_cloud_run_v2_job" "default" {
   name     = "cloudrun-job"
   location = "us-central1"
@@ -45,4 +49,7 @@ resource "google_cloud_run_v2_job" "default" {
       }
     }
   }
+  depends_on = [ // Here
+    google_project_service.cloud_run_api
+  ]
 }
