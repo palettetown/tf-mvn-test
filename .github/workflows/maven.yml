@@ -77,7 +77,7 @@ jobs:
     - id: 'gcloud'
       name: 'gcloud'
       run: |-             
-         gcloud builds submit --region=us-central1 --config ../../cloudbuild.yaml
+         gcloud builds submit --region=us-central1 --config cloudbuild.yaml
 
     #    gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
     #    echo "${{ steps.auth.outputs.credentials_file_path }}"
