@@ -38,17 +38,17 @@ provider "google" {
 #  service = "run.googleapis.com"
 #}
 
-#resource "google_cloud_run_v2_job" "default" {
-#  name     = "cloudrun-job"
-#  location = "us-central1"
+resource "google_cloud_run_v2_job" "default" {
+  name     = "cloudrun-job"
+  location = "us-central1"
 
-#  template {
-#    template {
-#      containers {
-#        image = "us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1"
-#      }
-#    }
-#  }
+  template {
+    template {
+      containers {
+        image = "us-central1-docker.pkg.dev/my-second-project-418213/my-docker-repo/quickstart-image:tag1"
+      }
+    }
+  }
 #  depends_on = [ // Here
 #    google_project_service.cloud_run_api
 #  ]
