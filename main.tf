@@ -49,7 +49,7 @@ resource "google_cloud_run_v2_job" "default" {
       }
     }
   }
-#  depends_on = [ // Here
-#    google_project_service.cloud_run_api
-#  ]
-#}
+  depends_on = [ // Here
+    google_project_service.cloud_run_api
+  ]
+}
